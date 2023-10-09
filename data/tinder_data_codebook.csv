@@ -8,8 +8,8 @@ days_open,the number of unique days the user has opened the app
 matches,total number of matches
 swipes_like,number of times the user swiped right
 swipes_pass,number of times the user swiped left
-messages_received,total number of messages sent on the app
-messages_sent,total number of messages received on the app
+messages_received,total number of messages received on the app
+messages_sent,total number of messages sent on the app
 avg_convo_length_msgs,average number of messages the user exchanged with a match
 avg_convo_length_days,average number of days the user exchanged messages with a match
 longest_convo_msgs,the most number of messages the user exchanged with a match
