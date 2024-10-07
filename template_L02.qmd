@@ -2,18 +2,24 @@
 title: "L02 Data Transformation"
 subtitle: "Data Science 1 with R (STAT 301-1)"
 author: "YOUR NAME"
+pagetitle: "L02 YOUR NAME"
+date: today
 
 format:
   html:
     toc: true
+    toc-depth: 4
+    toc-location: left
     embed-resources: true
-    code-fold: show
+    code-fold: false
     link-external-newwindow: true
 
 execute:
   warning: false
-  
-from: markdown+emoji 
+
+from: markdown+emoji
+reference-location: margin
+citation-location: margin 
 ---
 
 ::: {.callout-tip icon=false}
@@ -44,15 +50,18 @@ You should always begin by loading all necessary packages towards the beginning 
 
 ## Datasets 
 
-This lab utilizes the `college_rankings` dataset in your `data/` folder. Documentation/codebook can be found in `college_rankings_codebook.csv`. This data was obtained from [Times Higher Education](https://www.timeshighereducation.com/rankings/united-states/2022#!/length/-1/sort_by/rank/sort_order/asc/cols/scores) and [College Scorecard](https://collegescorecard.ed.gov/data). The following lines of code read in the dataset and codebook. We will learn more about reading in data in Chapter 7.   
+This lab utilizes the `college_rankings` dataset in your `data/` folder. Documentation/codebook can be found in `college_rankings_codebook.csv`. This data was obtained from [Times Higher Education](https://www.timeshighereducation.com/rankings/united-states/2022#!/length/-1/sort_by/rank/sort_order/asc/cols/scores) and [College Scorecard](https://collegescorecard.ed.gov/data). The case study utilizes `tinder_data.csv` located in your `data` folder along with its codebook. The following line of code reads in each dataset and its codebook. We will learn more about reading in data in Chapter 7.   
 
 ```{r}
 #| label: load-data
 #| eval: false
 
-# Load data
+# load data
 college_rankings <- read_csv("data/college_rankings.csv")
 college_rankings_codebook <- read_csv("data/college_rankings_codebook.csv")
+
+tinder_data <- read_csv("data/tinder_data.csv")
+tinder_data_codebook <- read_csv("data/tinder_data_codebook.csv")
 ```
 
 ## Exercises
@@ -77,9 +86,9 @@ YOUR SOLUTION HERE
 
 Find the colleges ranked 2, 3, and 4 in 3 different ways:
 
- - using the "or" operator
- - using `%in%`
- - using `between()`
+1. using the "or" operator
+2. using `%in%`
+3. using `between()`
 
 ::: {.callout-tip icon="false"}
 ## Solution
@@ -101,9 +110,8 @@ YOUR SOLUTION HERE
 
 ### Exercise 4
 
-a) Arrange the data to find the most expensive colleges
-
-b) Use the slice function to select the 5 most expensive colleges
+a. Arrange the data to find the most expensive colleges.
+b. Use the slice function to select the 5 most expensive colleges.
 
 ::: {.callout-tip icon="false"}
 ## Solution
@@ -165,7 +173,7 @@ YOUR SOLUTION HERE
 
 ### Exercise 9
 
-Rename the variable `rank_2023` to `rank` and move that column directly after `institution` in the dataframe.
+Rename the variable `rank_2023` to `rank` and move that column directly after `institution` in the data frame.
 
 ::: {.callout-tip icon="false"}
 ## Solution
@@ -192,12 +200,13 @@ You have a hypothetical dataset, `data`, with numeric variables `x`, `y`, `z` an
 
 What is wrong with the following code? Then fix it to accomplish the goal.
 
-a) You are interested in calculating the average of `x`, `y`, and `z`.
+a. You are interested in calculating the average of `x`, `y`, and `z`.
 
 ```{r}
+#| label: ex-11-part-a
 #| eval: false
 
-# puesdo code
+# pseudo code
 data |> 
   summarize(
     mean = mean(x),
@@ -207,12 +216,13 @@ data |>
 ```
 
 
-b) You are interested in calculating the average of `x` by `c` and arranging from high to low.
+b. You are interested in calculating the average of `x` by `c` and arranging from high to low.
 
 ```{r}
+#| label: ex-11-part-b
 #| eval: false
 
-# puesdo code
+# pseudo code
 data |> 
   group_by(c) |> 
   summarize(mean(x)) |> 
@@ -240,6 +250,12 @@ YOUR SOLUTION HERE
 
 ## Case Study
 
+::: {.callout-note collapse=true}
+
+The case study portion for labs is different than the exercises portion. The core learning objective for them is to see if you can bring tools together and produce work meant for more general consumption. That is, can you bring everything together and answer a question clearly and concisely with supporting evidence.
+
+:::
+
 You made it through your first week at your data analyst job at Tinder and are onto your next assignments. 
 
 The dataset is stored in the `data` folder called `tinder_data`. A codebook, `tinder_data_codebook.csv`, provides a description of each of the variable names. This has been read in for you at the top of the document. We will learn more about importing data later in the quarter. This dataset was provided by [Swipestats.io](https://www.swipestats.io/).
@@ -250,9 +266,9 @@ Determine the distribution of the percent of one message conversations.
 
 Tips:
 
-- how would you calculate the percent
-- remove any users who did not have any conversations as we are only interested in users who used the app
-- use both graph and relevant summary statistics to support your analysis
+- How would you calculate the percent?
+- Remove any users who did not have any conversations as we are only interested in users who used the app
+- Use both graph and relevant summary statistics to support your analysis
 
 ### Objective 2 
 
@@ -260,13 +276,15 @@ Determine who is most "popular/liked".
 
 Tips:
 
-- arrange the data to see the users with the most matches and output the top 5 users.
-- just because you have the most matches does not mean you are necessarily the most "popular/liked". Determine another way to quantify the most "popular/liked" user and output the top 5 users.
+- Arrange the data to see the users with the most matches and output the top 5 users.
+- Just because you have the most matches does not mean you are necessarily the most "popular/liked". Determine another way to quantify the most "popular/liked" user and output the top 5 users.
 - Compare your two results and comment on why your method is a "best" metric to quantify "popularity/likability". 
 
-::: callout-note
+::: {.callout-warning}
 
-Remember your boss likes pretty things! Make the graphic look nice. Your summary statistics should only include relevant columns and be displayed as a table. A useful way to make a table is to pipe your output into the `kable()` function. Any conclusions and insights should be in complete sentences.
+Remember, the final product is meant for your boss and they expect your work to be clear, to the point, and presentable! They don't care about code so it shouldn't be visible or even accessible. 
+
+Make your graphic(s) look nice. Summary statistics should only include relevant columns and be displayed as a table. A useful way to make a table is to pipe your output into the `knitr::kable()` function^[If you would like to add captions and reference tables in your write-up see this [quarto documentation](https://quarto.org/docs/authoring/cross-references.html#computations-1)]. Conclusions and insights should be in complete sentences.
 
 :::
 
@@ -279,7 +297,7 @@ YOUR SOLUTION HERE
 
 ## Graduate Challenge
 
-::: callout-important
+::: {.callout-important}
 Graduate students are required to complete this challenge. **It is optional for undergraduate students.**
 :::
 
@@ -291,9 +309,9 @@ We will be updating that analysis, but will be taking steps to clean the data an
 
 Complete the following tasks:
 
-- just because someone downloaded the app does not mean they sent or received messages, we are only interested in analyzing users who sent and received messages. First clean the data set by removing any irrelevant data.
-- we will define an outlier as any observation greater than Q3 + 1.5 * IQR or less than Q1 - 1.5 * IQR (Hint: use `quartile()` and `IQR()` to calculate)
-- plot the relationship of `messages_received` by `messages_sent` based on gender with the outliers removed. Include a caption indicating that outliers were removed.
+- Just because someone downloaded the app does not mean they sent or received messages, we are only interested in analyzing users who sent and received messages. First clean the data set by removing any irrelevant data.
+- We will define an outlier as any observation greater than Q3 + 1.5 * IQR or less than Q1 - 1.5 * IQR (Hint: use `quartile()` and `IQR()` to calculate)
+- Plot the relationship of `messages_received` by `messages_sent` based on gender with the outliers removed. Include a caption indicating that outliers were removed.
 - Calculate any relevant summary statistics 1) with the outliers included and 2) with the outliers removed. Comment on how the outliers are impacting your statistics.
 
 
