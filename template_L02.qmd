@@ -22,6 +22,10 @@ reference-location: margin
 citation-location: margin 
 ---
 
+::: callout-warning
+To make your solution output readable, you should select only relevant columns and slice a few observations, where appropriate. That way the entire data frame is not being printed.
+:::
+
 ::: {.callout-tip icon=false}
 
 ## Github Repo Link
